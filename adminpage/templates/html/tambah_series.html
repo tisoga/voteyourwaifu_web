@@ -1,0 +1,38 @@
+{% extends 'html/base_adminpage.html' %}
+
+{%block judul%}Tambah Siswa{%endblock%}
+
+{% block konten %}
+<div class="container">
+    <br>
+    <div class="row justify-content-center">
+        <div class="form-group bg-success col-6">
+            <form method="POST" enctype="multipart/form-data">
+                {%csrf_token%}
+                <div class="form-group">
+                    <label>Nama Series</label>
+                    <input type="text" class="form-control" name="nama" placeholder="Masukan Nama Series" required>
+                    <!-- <div class="form-group row mt-2">
+                        <label class="col-sm-12 col-5 pt-2">Tahun Ajaran</label>
+                        <select class="form-control col-sm-12 col-5" name="tahun">
+                            {% for tahun in tahun %}
+                            <option value="{{tahun}}">{{tahun.thn}}</option>
+                            {% endfor %}
+                        </select>
+                    </div> -->
+                    <label>Foto Logo</label>
+                    <input type="file" class="form-control bg-success mb-4" name="logo" required>
+                    <label>Foto Header</label>
+                    <input type="file" class="form-control bg-success mb-4" name="header" required>
+                    <label>Foto Body</label>
+                    <input type="file" class="form-control bg-success mb-4" name="body" required>
+                    <div class="form-group row">
+                        <input type="reset" class="form-control btn btn-danger col" value="Reset">
+                        <input type="submit" class="form-control btn btn-primary col" value="Tambah">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
