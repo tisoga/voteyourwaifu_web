@@ -1,0 +1,65 @@
+body{
+    background-color: darkslategrey;
+}
+
+.header{
+    height: 230px;
+    background-color: #E22D2D;
+}
+.footer{
+    margin-top: -50px;
+    height: 200px;
+    background-color: #E22D2D;
+}
+
+.button_header{
+    width: 110px;
+}
+
+.navigasi{
+    border-bottom: 3px solid transparent;
+}
+
+.navigasi:hover{
+    border-bottom: 3px solid black;
+}
+
+.navigasi.aktif{
+    border-bottom: 3px solid black;
+}
+
+.login_group{
+    position: absolute;
+    margin-right: auto;
+    right: 0;
+}
+
+.judul_page{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: cyan;
+}
+
+.card_judul{
+    background-color: #E34848;
+    margin: 10px 40px 0px 40px;
+    text-align: center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.card_text{
+    margin-top: 10px;
+    font-size: 30px;
+    height: 100px;
+    margin: auto;
+}
+
+.gambar_heroine{
+    filter: grayscale(100%);
+}
+
+.gambar_heroine:hover{
+    filter: grayscale(0%);
+    cursor: pointer;
+}

@@ -1,0 +1,106 @@
+{% extends 'html/base.html'%}
+
+{% block title%}Heroine List | {{seri.nama}}{% endblock %}
+
+{% block gambar_header%}{{seri.gambar_header}}{% endblock %}
+
+{% block gambar_body%}{{seri.gambar_body}}{%endblock%}
+
+{% block konten%}
+<div class="container-fluid" style="margin-top: -110px;">
+    <div class="row">
+        <div class="col">
+            <h1 class="judul_page"><u><b>{{seri.nama}}</b></u></h1>
+        </div>
+    </div>
+</div>
+
+<div class="container" style="margin-top: 60px;">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title text-center">Heroine List</h4>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center">
+                {% include 'html/messages.html'%}
+                {% if user.is_authenticated and is_voted == False%}
+                <form method="POST">
+                    {%csrf_token%}
+                    <input type="hidden" name="heroine_id" id="heroine_id">
+                    <span style="font-size: larger;">Choose Your Heroine : </span>
+                    <input type="submit" class="btn btn-primary" value="Vote">
+                </form>
+                {% elif user.is_authenticated and is_voted %}
+                <div>
+                    <span style="font-size: larger;" class="text-danger">You're already Vote for this Series</span><br>
+                    <span style="font-size: larger;" class="text-danger">Your Choice for this Series is :
+                        {{is_voted.heroine}}</span>
+                </div>
+                {% else %}
+                <span style="font-size: larger;">Please Login For Start Voting</span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                {% for data in kumpulan_data %}
+                <div class="col-sm-10 col-md-4 col-lg-3 border border-primary mt-3 ml-5 mr-4 gambar_heroine"
+                    onclick="checkTheBox('{{forloop.counter0}}')" name="box" 
+                    {%if user.is_authenticated and is_voted %}
+                        id="{{data.kode}}"
+                    {% endif%}
+                    >
+                    <div style="display: none;">
+                        <input type="radio" name="heroine" id="{{forloop.counter0}}" value="{{data.kode}}">
+                        <!-- <input type="text" name="heroine" id="{{forloop.counter0}}" value="{{data.kode}}"> -->
+                    </div>
+                    <div class="col">
+                        <p class="card-title text-center"><b>Total Vote : {{data.vote}}</b></p>
+                        <img src="{{data.gambar}}" height="400" width="100%" />
+                    </div>
+                    <div class="col text-justify">
+                        <h4 class="card-title text-center mt-2">{{data.nama}}</h4>
+                    </div>
+                    <table class='table'>
+                        <tr>
+                            <th class="align-middle" style="font-size: larger">Birthday</th>
+                            <td class="text-center align-middle" style="font-size: larger;">{{data.birthday}}</td>
+                        </tr>
+                        <tr>
+                            <th class="align-middle" style="font-size: larger;">Height</th>
+                            <td class="text-center align-middle" style="font-size: larger;">{{data.height}}</td>
+                        </tr>
+                        <tr>
+                            <th class="align-middle" style="font-size: larger;">Hair Color</th>
+                            <td class="text-center align-middle" style="font-size: larger;">{{data.hair_color}}</td>
+                        </tr>
+                        <tr>
+                            <th class="align-middle" style="font-size: larger;">Eye Color</th>
+                            <td class="text-center align-middle" style="font-size: larger;">{{data.eye_color}}</td>
+                        </tr>
+                        <tr>
+                            <th class="align-middle" style="font-size: larger;">Voice Actor</th>
+                            <td class="text-center align-middle" style="font-size: larger;">{{data.voice_actor}}</td>
+                        </tr>
+                    </table>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function checkTheBox(id) {
+        radio = document.getElementById(id);
+        box = document.getElementsByName('box');
+        text = document.getElementById('heroine_id');
+        radio.checked = true;
+        text.value = radio.value;
+        for (i = 0; i < box.length; i++) {
+            box[i].style.filter = 'grayscale(100%)'
+        }
+        box[id].style.filter = 'grayscale(0%)'
+    }
+</script>
+{% endblock %}

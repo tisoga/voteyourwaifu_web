@@ -1,0 +1,27 @@
+{% extends 'html/base.html'%}
+
+{% block title%}Series List{% endblock %}
+
+{% block konten%}
+<div class="container-fluid" style="margin-top: -110px;">
+    <div class="row">
+        <div class="col">
+            <h1 class="judul_page"><u>{{judul}}</u></h1>
+        </div>
+    </div>
+    <div class="row">
+        {% for data in kumpulan_data %}
+        <div class="col-4 mt-3">
+            <div class="card">
+                <img src="{{data.gambar}}" width="75%" height="200" style="margin: auto" />
+                <a href="{% url 'main:detail_series' data.kode%}" class="card-link stretched-link">
+                    <div class="card_judul card_text" style="display:flex;justify-content:center;align-items:center;">
+                        {{data.nama}}
+                    </div>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
